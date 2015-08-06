@@ -13,23 +13,16 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Atto text editor integration version file.
+ * Planet eStream tinymce Plugin
  *
+ * @since 2.0
  * @package    tinymce_planetestream
  * @copyright  Planet Enterprises Ltd
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  */
-
-defined('MOODLE_INTERNAL') || die();
-$plugin            = new StdClass();
-$plugin->component = 'tinymce_planetestream';
-$plugin->version   = 2015072700;
-$plugin->requires  = 2013051409; // Moodle 2.5.9.
-$plugin->release   = '5.69';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->dependencies = array(
-    'assignsubmission_estream' => ANY_VERSION,
-    'filter_planetestream' => 2015072300
-);
+/**
+ * Strings for component 'tinymce_planetestream', language 'en', branch 'MOODLE_20_STABLE'
+ */
+$string['pluginname'] = 'Planet eStream';
