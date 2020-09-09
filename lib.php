@@ -46,7 +46,15 @@ class tinymce_planetestream extends editor_tinymce_plugin {
         }
         $params['estream_url'] = $url;
         $checksum = $this->tinymce_planetestream_getchecksum();
-        $delta = $this->tinymce_planetestream_obfuscate($USER->username);
+		
+		profile_load_data($USER);
+	
+		if (isset($USER->profile_field_planetestreamusername) && !empty($USER->profile_field_planetestreamusername)) {
+		$delta = $this->tinymce_planetestream_obfuscate($USER->profile_field_planetestreamusername);
+		} else {
+		$delta = $this->tinymce_planetestream_obfuscate($USER->username);
+		}
+		
         $userip = $this->tinymce_planetestream_obfuscate(getremoteaddr());
         $authticket = $this->tinymce_planetestream_getauthticket($url, $checksum, $delta, $userip, $params);
         if ($authticket == '') {
@@ -55,7 +63,9 @@ class tinymce_planetestream extends editor_tinymce_plugin {
         $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
         . '&ticket=' . $authticket . '&inlinemode=moodle';
         $path .= '&mpu=' . ((string)$PAGE->pagetype == 'mod-assign-view' ? "true" : "false");
+		$path .= '&assign=' . ((string)$PAGE->pagetype == 'mod-assign-editsubmission' ? "true" : "false");
         $params['estream_path'] = $path;
+		$params['pagetype'] = (string)$PAGE->pagetype;
         $params['base_path'] = $CFG->httpswwwroot;
         // Add JS file, which uses default name.
         $this->add_js_plugin($params);

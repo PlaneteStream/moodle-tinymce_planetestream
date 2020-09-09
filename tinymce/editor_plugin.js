@@ -37,6 +37,7 @@
                 }
                 ed.windowManager.open({
                     file: url + '/iframe.html?estream_url=' + ed.getParam('estream_url', {})
+					 + '&pagetype=' + ed.getParam('pagetype', {})
  + '&estream_path=' + encodeURIComponent(ed.getParam('estream_path', {})
  + '&estream_height=' + ed.getParam('estream_height', {})
  + '&estream_width=' + ed.getParam('estream_width', {})),
