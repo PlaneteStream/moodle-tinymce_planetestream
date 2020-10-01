@@ -73,7 +73,7 @@
 				var pagetype = decodeURIComponent(querystring("pagetype"));
 			
 								
-				if (pagetype == 'mod-assign-editsubmission') { // iFrames will be stripped out of assign subs
+				if (pagetype == 'mod-assign-editsubmission' || pagetype == 'mod-assign-gradingpanel') { // iFrames will be stripped out of assign subs and grade panel
 							
 				var data = e.data;
 					var title="Assignment Submission";
@@ -106,10 +106,10 @@
 				
 				}
 				
-			insertContent('<p><iframe allow="autoplay; fullscreen" allowfullscreen style="width: ' + querystring('estream_width', true) + 'px;'
-                + ' height: ' + querystring('estream_height', true) + 'px; border: 0;" src="'
-                + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '&delta=ESDLTA" ></iframe><a href="'
-                + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a></p>');
+			//insertContent('<p><iframe allow="autoplay; fullscreen" allowfullscreen style="width: ' + querystring('estream_width', true) + 'px;'
+              //  + ' height: ' + querystring('estream_height', true) + 'px; border: 0;" src="'
+               // + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '&delta=ESDLTA" ></iframe><a href="'
+               // + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a></p>');
 				
 				}
 				

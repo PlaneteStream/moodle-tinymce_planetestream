@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 $plugin            = new StdClass();
 $plugin->component = 'tinymce_planetestream';
-$plugin->version   = 2020070900;
+$plugin->version   = 2020100100;
 $plugin->requires  = 2013111800; // Moodle 2.6
 $plugin->release   = '6.46';
 $plugin->maturity  = MATURITY_STABLE;
