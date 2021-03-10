@@ -52,7 +52,11 @@ class tinymce_planetestream extends editor_tinymce_plugin {
 		if (isset($USER->profile_field_planetestreamusername) && !empty($USER->profile_field_planetestreamusername)) {
 		$delta = $this->tinymce_planetestream_obfuscate($USER->profile_field_planetestreamusername);
 		} else {
+		if (get_config('assignsubmission_estream', 'usemail') == true) {
+		$delta = $this->tinymce_planetestream_obfuscate($USER->email);
+	} else {
 		$delta = $this->tinymce_planetestream_obfuscate($USER->username);
+	}
 		}
 		
         $userip = $this->tinymce_planetestream_obfuscate(getremoteaddr());
@@ -102,7 +106,7 @@ class tinymce_planetestream extends editor_tinymce_plugin {
      * @return string
      *
      */
-    private function tinymce_planetestream_obfuscate($strx) {
+    function tinymce_planetestream_obfuscate($strx) {
         $strbase64chars = '0123456789aAbBcCDdEeFfgGHhiIJjKklLmMNnoOpPQqRrsSTtuUvVwWXxyYZz/+=';
         $strbase64string = base64_encode($strx);
         if ($strbase64string == '') {
