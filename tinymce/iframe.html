@@ -40,7 +40,7 @@
 <body>
     <form onsubmit="insertMedia();return false;" action="#">
         <script type="text/javascript">
-		
+				
             document.write("<div id=\"scrollWrapper\" style=\"border: 0px; width: 100%; height: 100%;\"><iframe id=\"ifDefault\" allow=\"microphone; camera;\" style=\"border: 0px; width: 100%; height: 99%;\" src=\""
             + querystring("estream_url") + decodeURIComponent(querystring("estream_path"))
             + '&td=' + window.location.protocol + '//' + window.location.host + ':'
@@ -55,6 +55,9 @@
 			document.getElementById("scrollWrapper").style.width = "100%";
 
 			document.getElementById("ifDefault").style.WebkitTransform = "translate3d(0,0,0)";
+			
+			
+			
             if (window.addEventListener) {
                 eventMethod = 'addEventListener';
                 messageEvent = 'message';
@@ -70,8 +73,8 @@
             var evX = window[eventMethod];
             evX(messageEvent, function (e) {
 			
-			if (e.data.indexOf("ID=") > -1 && e.data.indexOf("&source=moodle") > -1) {
-			
+			if (e.data.indexOf("ID=") > -1) {
+			if (e.data.indexOf("&source=moodle") > -1 || e.data.indexOf("&source=Moodle") > -1) {
                 
 				var pagetype = decodeURIComponent(querystring("pagetype"));
 		
@@ -118,7 +121,7 @@
 				}
 				
 				}
-				
+				}
 				
 
             }, false);
