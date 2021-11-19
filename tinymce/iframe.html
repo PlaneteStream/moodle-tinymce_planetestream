@@ -93,23 +93,55 @@
 						console.log(ex);
 					}
 				
-				insertContent('<a href="'
+				if (e.data.indexOf("delta=") > -1) {
+					insertContent('<a href="'
+ + querystring('estream_url', true) + '/View.aspx?' + e.data + '" target="_blank">' + title + '</a><br><br>');
+				} else {
+					insertContent('<a href="'
  + querystring('estream_url', true) + '/View.aspx?' + e.data + '&delta=ESDLTA" target="_blank">' + title + '</a><br><br>');
+				}
+				
+			
 				
 				} else {
 								
 					if (querystring('estream_width', true) == "0" && querystring('estream_height', true) == "0") {
 				
+				if (e.data.indexOf("delta=") > -1) {
+				
 				insertContent('<div style="position:relative;overflow:hidden;padding-top:56.25%;"><iframe allow="autoplay; fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="'
-                + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '&delta=ESDLTA" ></iframe><a href="'
+                + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '" ></iframe><a href="'
                 + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a></div>');
 				
 				} else {
 				
-				insertContent('<iframe allow="autoplay; fullscreen" allowfullscreen style="width: ' + querystring('estream_width', true) + 'px;'
+				insertContent('<div style="position:relative;overflow:hidden;padding-top:56.25%;"><iframe allow="autoplay; fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="'
+                + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '&delta=ESDLTA" ></iframe><a href="'
+                + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a></div>');
+				
+				}
+				
+				
+				
+				} else {
+				
+				if (e.data.indexOf("delta=") > -1) {
+				
+						insertContent('<iframe allow="autoplay; fullscreen" allowfullscreen style="width: ' + querystring('estream_width', true) + 'px;'
+                + ' height: ' + querystring('estream_height', true) + 'px; border: 0;" src="'
+                + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '" ></iframe><a href="'
+                + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a>');
+				
+				} else {
+				
+						insertContent('<iframe allow="autoplay; fullscreen" allowfullscreen style="width: ' + querystring('estream_width', true) + 'px;'
                 + ' height: ' + querystring('estream_height', true) + 'px; border: 0;" src="'
                 + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '&delta=ESDLTA" ></iframe><a href="'
                 + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a>');
+				
+				}
+				
+		
 				
 				}
 				
