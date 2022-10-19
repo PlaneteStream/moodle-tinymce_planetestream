@@ -98,6 +98,7 @@
 				var data = e.data;
 				
 				var title = decodeURIComponent(getQS(data, "title"));
+					title = title.split("+").join(" ");
 								
 				if (e.data.indexOf("delta=") > -1) {
 					insertContent('<a href="'
