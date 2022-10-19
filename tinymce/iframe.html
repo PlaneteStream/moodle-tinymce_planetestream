@@ -15,7 +15,9 @@
         editor_tinymce_include('utils/validate.js');
         editor_tinymce_include('utils/form_utils.js');
         editor_tinymce_include('utils/editable_selects.js');
+		
         var inserted = false;
+		
         function insertContent(html) {
             if (inserted === false) {
                 inserted = true;
@@ -23,6 +25,18 @@
                 tinyMCEPopup.close();
             }
         }
+		
+		function getQS(query, variable) { 
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    return "Response";
+}
+		
         function querystring(variable, decode) {
             var query = window.location.search.substring(1);
             if (decode) {
@@ -83,16 +97,8 @@
 							
 				var data = e.data;
 				
-					var title="Assignment Submission";
-					try {
-						var split = data.split("&");
-				 title = split[1].split("=")[1];
-			    title = decodeURIComponent(title);
-				title = title.split("+").join(" ");
-					} catch(ex) {
-						console.log(ex);
-					}
-				
+				var title = decodeURIComponent(getQS(data, "title"));
+								
 				if (e.data.indexOf("delta=") > -1) {
 					insertContent('<a href="'
  + querystring('estream_url', true) + '/View.aspx?' + e.data + '" target="_blank">' + title + '</a><br><br>');

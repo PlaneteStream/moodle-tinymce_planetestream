@@ -40,10 +40,7 @@ class tinymce_planetestream extends editor_tinymce_plugin {
             $this->add_button_after($params, 1, 'planetestream');
         }
         // Define parameters.
-        $url = rtrim(get_config('assignsubmission_estream', 'url') , '/');
-        if (empty($url)) {
-            $url = rtrim(get_config('planetestream', 'url') , '/');
-        }
+        $url = rtrim(get_config('assignsubmission_estream', 'url') , '/');       
         $params['estream_url'] = $url;
         $checksum = $this->tinymce_planetestream_getchecksum();
 		
