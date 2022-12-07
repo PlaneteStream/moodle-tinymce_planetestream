@@ -26,3 +26,7 @@
  * Strings for component 'tinymce_planetestream', language 'en', branch 'MOODLE_20_STABLE'
  */
 $string['pluginname'] = 'Planet eStream';
+$string['privacy:metadata:tinymce_planetestream'] = 'In order to integrate with Planet eStream, user information must be relayed.';
+$string['privacy:metadata:tinymce_planetestream:userid'] = 'Your user ID is used to find your email address.';
+$string['privacy:metadata:tinymce_planetestream:userip'] = 'Your IP address is used as a security measure when sending data between Moodle and Planet eStream.';
+$string['privacy:metadata:tinymce_planetestream:email'] = 'Your email is used to complete authentication between Moodle and Planet eStream.';
