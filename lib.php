@@ -72,7 +72,21 @@ class tinymce_planetestream extends editor_tinymce_plugin {
 				$assignmode = "true";
 		}
 		
-        $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
+		if (pagetype == 'mod-assign-editsubmission' || pagetype == 'mod-assign-gradingpanel') { 
+		
+		  $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
+        . '&ticket=' . $authticket . '&inlinemode=moodle&assign=true';
+        $path .= '&mpu=' . ((string)$PAGE->pagetype == 'mod-assign-view' ? "true" : "false");
+		$path .= '&assign=' . $assignmode;
+        $params['estream_path'] = $path;
+		$params['pagetype'] = (string)$PAGE->pagetype;
+        $params['base_path'] = $CFG->httpswwwroot;
+        // Add JS file, which uses default name.
+        $this->add_js_plugin($params);
+		
+		} else {
+			
+			  $path = '/VLE/Moodle/Default.aspx?delta=' . $delta . '&checksum=' . $checksum
         . '&ticket=' . $authticket . '&inlinemode=moodle';
         $path .= '&mpu=' . ((string)$PAGE->pagetype == 'mod-assign-view' ? "true" : "false");
 		$path .= '&assign=' . $assignmode;
@@ -81,6 +95,10 @@ class tinymce_planetestream extends editor_tinymce_plugin {
         $params['base_path'] = $CFG->httpswwwroot;
         // Add JS file, which uses default name.
         $this->add_js_plugin($params);
+			
+		}
+		
+      
     }
     /**
      * Returns the order in which to run this plugin.
