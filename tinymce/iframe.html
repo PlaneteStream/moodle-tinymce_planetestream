@@ -55,7 +55,7 @@
     <form onsubmit="insertMedia();return false;" action="#">
         <script type="text/javascript">
 				
-            document.write("<div id=\"scrollWrapper\" style=\"border: 0px; width: 100%; height: 100%;\"><iframe id=\"ifDefault\" allow=\"microphone; camera;\" style=\"border: 0px; width: 100%; height: 99%;\" src=\""
+            document.write("<div id=\"scrollWrapper\" style=\"border: 0px; width: 100%; height: 100%;\"><iframe id=\"ifDefault\" allow=\"microphone; display-capture;\" style=\"border: 0px; width: 100%; height: 99%;\" src=\""
             + querystring("estream_url") + decodeURIComponent(querystring("estream_path"))
             + '&td=' + window.location.protocol + '//' + window.location.host + ':'
             + ((window.location.port === '80' && window.location.protocol==='http')|
