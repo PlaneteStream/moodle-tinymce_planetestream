@@ -25,9 +25,9 @@
 defined('MOODLE_INTERNAL') || die();
 $plugin            = new StdClass();
 $plugin->component = 'tinymce_planetestream';
-$plugin->version   = 2023040100;
+$plugin->version   = 2024011000;
 $plugin->requires  = 2013111800; // Moodle 2.6
-$plugin->release   = '6.542';
+$plugin->release   = '6.55';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->dependencies = array(
     'assignsubmission_estream' => ANY_VERSION,

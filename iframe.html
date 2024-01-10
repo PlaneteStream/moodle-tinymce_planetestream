@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Planet eStream</title>
+    <script type="text/javascript">
+        // Because there is no relative path to TinyMCE, we have to use JavaScript
+        // to work out correct path from the .js files from TinyMCE. Only files
+        // inside this plugin can be included with relative path (below).
+        var editor_tinymce_include = function (path) {
+            document.write('<script type="text/javascript" src="' +
+            parent.tinyMCE.baseURL + '/' + path + '"></' + 'script>');
+        };
+        editor_tinymce_include('tiny_mce_popup.js');
+        editor_tinymce_include('utils/validate.js');
+        editor_tinymce_include('utils/form_utils.js');
+        editor_tinymce_include('utils/editable_selects.js');
+		
+        var inserted = false;
+		
+        function insertContent(html) {
+            if (inserted === false) {
+                inserted = true;
+                tinyMCEPopup.editor.execCommand('mceInsertContent', false, html);
+                tinyMCEPopup.close();
+            }
+        }
+		
+		function getQS(query, variable) { 
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    return "Response";
+}
+		
+        function querystring(variable, decode) {
+            var query = window.location.search.substring(1);
+            if (decode) {
+                query = decodeURIComponent(window.location.search.substring(1));
+            }
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return "";
+        }
+</script>
+</head>
+<body>
+    <form onsubmit="insertMedia();return false;" action="#">
+        <script type="text/javascript">
+				
+            document.write("<div id=\"scrollWrapper\" style=\"border: 0px; width: 100%; height: 100%;\"><iframe id=\"ifDefault\" allow=\"microphone; camera; display-capture;\" style=\"border: 0px; width: 100%; height: 99%;\" src=\""
+            + querystring("estream_url") + decodeURIComponent(querystring("estream_path"))
+            + '&td=' + window.location.protocol + '//' + window.location.host + ':'
+            + ((window.location.port === '80' && window.location.protocol==='http')|
+            (window.location.port === '443' && window.location.protocol==='https') 
+            ? '' : window.location.port) + "\"></iframe></div>");
+			
+			document.getElementById("scrollWrapper").style.overflowY = "scroll";
+			document.getElementById("scrollWrapper").style.WebkitOverflowScrolling = 'touch'; 
+			document.getElementById("scrollWrapper").style.position = "fixed";
+			document.getElementById("scrollWrapper").style.height = "100%";
+			document.getElementById("scrollWrapper").style.width = "100%";
+
+			document.getElementById("ifDefault").style.WebkitTransform = "translate3d(0,0,0)";
+			
+			
+			
+            if (window.addEventListener) {
+                eventMethod = 'addEventListener';
+                messageEvent = 'message';
+            } else if (window.postMessage) {
+                eventMethod = 'attachEvent';
+                messageEvent = 'onmessage';
+            } else {
+                insertContent('Sorry, your web-browser is not compatible with this feature.');
+            }
+			
+			
+			
+            var evX = window[eventMethod];
+            evX(messageEvent, function (e) {
+			
+			if (e.data.indexOf("ID=") > -1) {
+			if (e.data.indexOf("&source=moodle") > -1 || e.data.indexOf("&source=Moodle") > -1) {
+                
+				var pagetype = decodeURIComponent(querystring("pagetype"));
+		
+								
+				if (pagetype == 'mod-assign-editsubmission' || pagetype == 'mod-assign-gradingpanel') { // iFrames will be stripped out of assign subs and grade panel
+							
+				var data = e.data;
+				
+				var title = decodeURIComponent(getQS(data, "title"));
+					title = title.split("+").join(" ");
+								
+				if (e.data.indexOf("delta=") > -1) {
+					insertContent('<a href="'
+ + querystring('estream_url', true) + '/View.aspx?' + e.data + '" target="_blank">' + title + '</a><br><br>');
+				} else {
+					insertContent('<a href="'
+ + querystring('estream_url', true) + '/View.aspx?' + e.data + '&delta=ESDLTA" target="_blank">' + title + '</a><br><br>');
+				}
+				
+				} else {
+								
+					if (querystring('estream_width', true) == "0" && querystring('estream_height', true) == "0") {
+				
+				if (e.data.indexOf("delta=") > -1) {
+				
+				insertContent('<div style="position:relative;overflow:hidden;padding-top:56.25%;"><iframe allow="autoplay; fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="'
+                + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '" ></iframe><a href="'
+                + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a></div>');
+				
+				} else {
+				
+				insertContent('<div style="position:relative;overflow:hidden;padding-top:56.25%;"><iframe allow="autoplay; fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="'
+                + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '&delta=ESDLTA" ></iframe><a href="'
+                + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a></div>');
+				
+				}
+				
+				} else {
+				
+				if (e.data.indexOf("delta=") > -1) {
+				
+						insertContent('<iframe allow="autoplay; fullscreen" allowfullscreen style="width: ' + querystring('estream_width', true) + 'px;'
+                + ' height: ' + querystring('estream_height', true) + 'px; border: 0;" src="'
+                + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '" ></iframe><a href="'
+                + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a>');
+				
+				} else {
+				
+						insertContent('<iframe allow="autoplay; fullscreen" allowfullscreen style="width: ' + querystring('estream_width', true) + 'px;'
+                + ' height: ' + querystring('estream_height', true) + 'px; border: 0;" src="'
+                + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '&delta=ESDLTA" ></iframe><a href="'
+                + '/_planetestreamiframe_/Embed.aspx?' + e.data + '">&nbsp;</a>');
+				
+				}
+				
+				}
+				
+				}
+				
+				}
+				}
+				
+
+            }, { once: true });
+</script>
+    </form>
+</body>
+</html>
