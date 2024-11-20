@@ -102,10 +102,10 @@
 								
 				if (e.data.indexOf("delta=") > -1) {
 					insertContent('<a href="'
- + querystring('estream_url', true) + '/View.aspx?' + e.data + '" target="_blank">' + title + '</a><br><br>');
+ + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '" target="_blank">' + title + '</a><br><br>');
 				} else {
 					insertContent('<a href="'
- + querystring('estream_url', true) + '/View.aspx?' + e.data + '&delta=ESDLTA" target="_blank">' + title + '</a><br><br>');
+ + querystring('estream_url', true) + '/Embed.aspx?' + e.data + '&delta=ESDLTA" target="_blank">' + title + '</a><br><br>');
 				}
 				
 				} else {
